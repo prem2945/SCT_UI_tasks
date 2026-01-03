@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brew & Bean Coffee - Modern Redesign</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-brown: #6F4E37;
+            --secondary-brown: #8B6F47;
+            --accent-gold: #D4AF37;
+            --cream: #F5F1E8;
+            --dark-text: #2C2416;
+            --light-text: #6B6B6B;
+            --white: #FFFFFF;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-brown);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--primary-brown);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .cta-nav {
+            background: linear-gradient(135deg, var(--primary-brown), var(--secondary-brown));
+            color: var(--white);
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .cta-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(111, 78, 55, 0.3);
+        }
+        
+        .cta-nav::after {
+            display: none;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--cream) 0%, #E8E0D4 100%);
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary-brown);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--light-text);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-brown), var(--secondary-brown));
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(111, 78, 55, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(111, 78, 55, 0.4);
+        }
+        
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary-brown);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid var(--primary-brown);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary-brown);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+        
+        .hero-image {
+            position: relative;
+        }
+        
+        .hero-image-placeholder {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, var(--primary-brown), var(--secondary-brown));
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.05);
+            transition: transform 0.5s ease;
+        }
+
+        .hero-image-placeholder:hover img {
+            transform: scale(1.12);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 2rem;
+            background: var(--white);
+        }
+        
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary-brown);
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--light-text);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: var(--cream);
+            border-radius: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-brown), var(--secondary-brown));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.5rem;
+            box-shadow: 0 5px 15px rgba(111, 78, 55, 0.2);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary-brown);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .feature-card p {
+            color: var(--light-text);
+            line-height: 1.7;
+        }
+        
+        /* Menu Preview */
+        .menu-preview {
+            padding: 5rem 2rem;
+            background: var(--cream);
+        }
+        
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .menu-item {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .menu-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary-brown), var(--secondary-brown));
+        }
+        
+        .menu-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .menu-item:hover .menu-image img {
+            transform: scale(1.1);
+        }
+        
+        .menu-content {
+            padding: 1.5rem;
+        }
+        
+        .menu-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-brown);
+            margin-bottom: 0.5rem;
+        }
+        
+        .menu-description {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .menu-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .menu-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-brown);
+        }
+        
+        .menu-btn {
+            background: var(--accent-gold);
+            color: var(--white);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        
+        .menu-btn:hover {
+            transform: scale(1.1);
+            background: var(--primary-brown);
+        }
+        
+        .view-all-btn {
+            text-align: center;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 5rem 2rem;
+            background: var(--white);
+        }
+        
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--primary-brown), var(--secondary-brown));
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.05);
+            transition: transform 0.4s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.12);
+        }
+
+        .about-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary-brown);
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-content p {
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .mini-menu {
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .mini-menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .mini-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            background: var(--cream);
+        }
+
+        .mini-menu-thumb {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .mini-menu-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .mini-menu-info {
+            flex: 1;
+        }
+
+        .mini-menu-name {
+            font-weight: 600;
+            color: var(--primary-brown);
+            margin-bottom: 0.15rem;
+        }
+
+        .mini-menu-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--light-text);
+        }
+
+        .mini-menu-price {
+            font-weight: 600;
+            color: var(--primary-brown);
+        }
+
+        .mini-menu-cta {
+            text-align: right;
+        }
+
+        .mini-menu-cta .btn-secondary {
+            padding: 0.7rem 1.8rem;
+            font-size: 0.95rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-brown);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-text);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-gold);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: var(--accent-gold);
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--accent-gold);
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">☕</span>
+                <span>Brew & Bean</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#order" class="cta-nav">Order Online</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Experience Coffee<br>Like Never Before</h1>
+                <p>Since 2010, we've been crafting the perfect cup with passion, quality beans, and a commitment to excellence. Join us for an unforgettable coffee experience.</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });">View Menu</button>
+                    <button class="btn-secondary" onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });">Visit Us</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-placeholder">
+                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=900&h=700&fit=crop" alt="Barista preparing specialty coffee at Brew & Bean">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="features-container">
+            <div class="section-header">
+                <h2>Why Choose Us</h2>
+                <p>We're committed to delivering the finest coffee experience with quality, sustainability, and service at our core.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">☕</div>
+                    <h3>Fresh Roasted Daily</h3>
+                    <p>Our beans are roasted fresh every morning to ensure you get the perfect flavor and aroma in every cup.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌱</div>
+                    <h3>100% Organic</h3>
+                    <p>We source our coffee beans from certified organic farms, ensuring quality and environmental responsibility.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Fast & Reliable</h3>
+                    <p>Order online and get your favorite coffee delivered quickly, or visit us for a cozy in-store experience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Preview -->
+    <section class="menu-preview" id="menu">
+        <div class="menu-container">
+            <div class="section-header">
+                <h2>Our Popular Items</h2>
+                <p>Discover our signature drinks and customer favorites</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400&h=300&fit=crop" alt="Espresso Coffee">
+                    </div>
+                    <div class="menu-content">
+                        <div class="menu-name">Espresso</div>
+                        <div class="menu-description">Rich, bold, and perfectly balanced</div>
+                        <div class="menu-footer">
+                            <span class="menu-price">₹290</span>
+                            <button class="menu-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&h=300&fit=crop" alt="Cappuccino Coffee">
+                    </div>
+                    <div class="menu-content">
+                        <div class="menu-name">Cappuccino</div>
+                        <div class="menu-description">Espresso with steamed milk foam</div>
+                        <div class="menu-footer">
+                            <span class="menu-price">₹375</span>
+                            <button class="menu-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop" alt="Latte Coffee">
+                    </div>
+                    <div class="menu-content">
+                        <div class="menu-name">Latte</div>
+                        <div class="menu-description">Smooth espresso with steamed milk</div>
+                        <div class="menu-footer">
+                            <span class="menu-price">₹395</span>
+                            <button class="menu-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=400&h=300&fit=crop" alt="Mocha Coffee">
+                    </div>
+                    <div class="menu-content">
+                        <div class="menu-name">Mocha</div>
+                        <div class="menu-description">Chocolate espresso delight</div>
+                        <div class="menu-footer">
+                            <span class="menu-price">₹415</span>
+                            <button class="menu-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="view-all-btn">
+                <button class="btn-secondary">View Full Menu</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?w=800&h=600&fit=crop" alt="Inside view of Brew & Bean coffee shop">
+            </div>
+            <div class="about-content">
+                <h2>Our Story</h2>
+                <p>Founded in 2010, Brew & Bean started as a small neighborhood coffee shop with a big dream: to bring exceptional coffee to our community. What began as a passion project has grown into a beloved local institution.</p>
+                <p>We source our beans directly from sustainable farms, roast them in-house daily, and craft each cup with care. Our commitment to quality, community, and sustainability drives everything we do.</p>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">14+</div>
+                        <div class="stat-label">Years Serving</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50K+</div>
+                        <div class="stat-label">Happy Customers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Organic Beans</div>
+                    </div>
+                </div>
+
+                <!-- Mini menu next to Our Story -->
+                <div class="mini-menu">
+                    <div class="mini-menu-list">
+                        <div class="mini-menu-item">
+                            <div class="mini-menu-thumb">
+                                <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=200&h=200&fit=crop" alt="Caramel Macchiato">
+                            </div>
+                            <div class="mini-menu-info">
+                                <div class="mini-menu-name">Caramel Macchiato</div>
+                                <div class="mini-menu-meta">
+                                    <span>Signature sweet & smooth</span>
+                                    <span class="mini-menu-price">₹420</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mini-menu-item">
+                            <div class="mini-menu-thumb">
+                                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=200&h=200&fit=crop" alt="Cold Brew">
+                            </div>
+                            <div class="mini-menu-info">
+                                <div class="mini-menu-name">Cold Brew</div>
+                                <div class="mini-menu-meta">
+                                    <span>Slow-steeped, extra smooth</span>
+                                    <span class="mini-menu-price">₹350</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mini-menu-item">
+                            <div class="mini-menu-thumb">
+                                <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=200&h=200&fit=crop" alt="Mocha Frappe">
+                            </div>
+                            <div class="mini-menu-info">
+                                <div class="mini-menu-name">Mocha Frappe</div>
+                                <div class="mini-menu-meta">
+                                    <span>Iced chocolate indulgence</span>
+                                    <span class="mini-menu-price">₹460</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mini-menu-cta">
+                        <button class="btn-secondary" onclick="document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });">
+                            View Full Menu
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Location</h3>
+                <ul>
+                    <li>67,Ground Floor</li>
+                    <li>sai nagar</li>
+                    <li>Mumbai, Maharashtra</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Hours</h3>
+                <ul>
+                    <li>Monday - Friday</li>
+                    <li>7:00 AM - 7:00 PM</li>
+                    <li>Saturday - Sunday</li>
+                    <li>8:00 AM - 8:00 PM</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                </ul>
+                <div class="social-links">
+                    <a href="#" class="social-link">f</a>
+                    <a href="#" class="social-link">in</a>
+                    <a href="#" class="social-link">@</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li>Phone: (555) 123-4567</li>
+                    <li>Email: info@brewbean.com</li>
+                    <li><a href="#">Order Online</a></li>
+                    <li><a href="#">Reservations</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Brew & Bean Coffee. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+</body>
+</html>
+
